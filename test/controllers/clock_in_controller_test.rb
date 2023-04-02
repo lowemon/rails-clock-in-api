@@ -1,6 +1,6 @@
 require "test_helper"
 
-class SleepRecordTest < ActiveSupport::TestCase
+class ClockInsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
