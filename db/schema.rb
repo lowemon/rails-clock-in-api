@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
 
   create_table "clock_ins", force: :cascade do |t|
     t.datetime "clocked_in_at"
+    t.datetime "clocked_out_at"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -29,17 +30,8 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
-  create_table "sleep_records", force: :cascade do |t|
-    t.integer "user_id"
-    t.float "length"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_sleep_records_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
-    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -47,5 +39,4 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
   add_foreign_key "clock_ins", "users"
   add_foreign_key "follows", "followeds"
   add_foreign_key "follows", "followers"
-  add_foreign_key "sleep_records", "users"
 end
