@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
+    t.integer "followed_user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["followed_id"], name: "index_follows_on_followed_id"
+    t.index ["followed_user_id"], name: "index_follows_on_followed_user_id"
     t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
@@ -38,6 +38,6 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
   end
 
   add_foreign_key "clock_ins", "users"
-  add_foreign_key "follows", "followeds"
-  add_foreign_key "follows", "followers"
+  add_foreign_key "follows", "users", column: "followed_user_id"
+  add_foreign_key "follows", "users", column: "follower_id"
 end

@@ -16,8 +16,10 @@ class FollowsController < ApplicationController
   end
 
   def follow_user
-    @follow = Follow.new(follow_params)
-
+    @follow = Follow.new(
+      follower_id: params[:user_id],
+      followed_user_id: params[:followed_user_id]
+    )
     if @follow.save
       render json: @follow, status: :created
     else
@@ -35,9 +37,5 @@ class FollowsController < ApplicationController
 
   def set_user
     @user = User.find(params[:user_id])
-  end
-
-  def follow_params
-    params.require(:follow).permit(:follower_id, :followed_id)
   end
 end
