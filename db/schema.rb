@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2023_04_02_190447) do
   create_table "clock_ins", force: :cascade do |t|
     t.datetime "clocked_in_at"
     t.datetime "clocked_out_at"
+    t.float "duration"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
