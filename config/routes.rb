@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :users, only: %i[index] do
-    resources :clock_ins, only: %i[index] do
-      post :clock_in, on: :collection
-      post :clock_out, on: :member
-    end
+  scope path: 'api/v1/users', module: 'api/v1', as: :v1 do
+    get '/', to: 'users#index'
+    get '/:id/followed-users/:followed_user_id/sleep-sessions', to: 'users#sleep_sessions'
+    get '/:id/followed-users', to: 'users#followed_users'
 
-    resources :follows, only: %i[] do
-      get :followed_records, on: :collection
-      member do
-        post :follow_user
-        post :unfollow_user
-      end
-    end
+    post '/follow-user', to: 'users#follow_user'
+    delete '/unfollow-user', to: 'users#unfollow_user'
+    post '/log-session', to: 'users#log_session'
   end
 end

@@ -10,31 +10,65 @@ This README describes the purpose of this repository and how to set up a develop
 
 - Clone this repository! *tada*
 - (bundle install) Open your terminal and install the required dependencies
+- Setup database
 - Open your Postman (or terminal if you want to use curl)
 - Check the available endpoints for this API
 - *tada* You're good to go!
 
+### Database
+    ```
+      > rails db:create
+      > rails db:migrate
+      > rails db:seed
+    ```
 
 # Endpoints Available:
 
-## Users
-- GET all users: GET http://localhost:3000/users
+## API
 
-## Clock-in/out
-- GET all clock ins for user: GET http://localhost:3000/users/:user_id/clock_ins
+### Endpoints
 
-- POST clock in for user: POST http://localhost:3000/users/clock_ins/clock_in
+#### GET /api/v1/users
+##### Description
+    Fetch Users
+----------------------------------------------------------------------
+#### GET /api/v1/users/:id/followed-users/:followed_user_id/sleep_sessions
+##### Description
+    View Followed User's sleep logs
+##### Parameters
+    - id -> User ID
+    - followed_user_id -> ID of followed User that you want to view sleep logs
+----------------------------------------------------------------------
+#### GET /api/v1/users/:id/followed-users
+##### Description
+    Fetch Followed Users
+##### Parameters
+    - id -> User ID
+----------------------------------------------------------------------
+#### POST /api/v1/users/follow-user
+##### Description
+    Follow a User
+##### Parameters
+    - id -> User ID
+    - followed_user_id -> ID of the User that you want to follow
+----------------------------------------------------------------------
 
-- POST clock out for a specific clock in: POST http://localhost:3000/users/:user_id/clock_ins/:clock_in_id/clock_out
+#### DELETE /api/v1/users/unfollow-user
+##### Description
+    Unfollow a User
+##### Parameters
+    - id -> User ID
+    - followed_user_id -> ID of the User that you want to follow
+----------------------------------------------------------------------
+#### POST /api/v1/users/log-session
+##### Description
+    Log sleep session
+##### Parameters
+    - id -> User ID
+----------------------------------------------------------------------
 
-
-## Followed/Followers
-
-- GET all followed records for user: GET http://localhost:3000/users/:user_id/follows/followed_records
-
-- POST follow a user: POST http://localhost:3000/users/:user_id/follows/:followed_id/follow_user
-
-- POST unfollow a user: POST http://localhost:3000/users/:user_id/follows/:following_id/unfollow_user
-
-# NOTE: you'll need to replace :user_id and :id with the actual IDs for the respective resources.
+### Responses
+  - 200 -> Success Request
+  - 400 -> Validation Error e.g User already followed
+  - 404 -> User or Followed User not found
 

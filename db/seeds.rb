@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+if User.any?
+  puts "\nSkip Seeding Data"
+end
+
+User.create(
+  [
+    { name: 'Louie Escano' },
+    { name: 'Clinton Gutkowski' },
+    { name: 'Desiree Huels' },
+    { name: 'Sabrina Kiehn' },
+    { name: 'Valentine Prohaska' },
+    { name: 'Mathilde Bergnaum' },
+    { name: 'Aida Shields'},
+    { name: 'Hwa Huel'}
+  ]
+)
+
+puts "Successfully seeded #{User.count} records"
+
